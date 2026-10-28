@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trendswave Apprenticeship Portal</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Trendswave Apprenticeship Agreement Workflow</h1>
+
+      <section>
+        <h2>1) Apprentice signs agreement</h2>
+        <form id="agreement-form">
+          <label>Apprentice Name <input name="apprenticeName" required /></label>
+          <label>Apprentice Email <input name="apprenticeEmail" type="email" required /></label>
+          <label>Signature (typed full name) <input name="apprenticeSignature" required /></label>
+          <label>Agreement Terms <textarea name="termsText" required></textarea></label>
+          <button type="submit">Sign Agreement</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>2) Apprentice submits payment confirmation</h2>
+        <form id="payment-form">
+          <label>
+            Payment made?
+            <select name="paymentMade" required>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </label>
+          <label>Amount paid <input name="amountPaid" type="number" min="0" step="0.01" required /></label>
+          <label>Payment date <input name="paymentDate" type="date" required /></label>
+          <label>Payment method/reference <input name="paymentMethodReference" required /></label>
+          <label>
+            Remaining balance
+            <input name="remainingBalance" type="number" min="0" step="0.01" required />
+          </label>
+          <label>
+            Expected payment date for remaining balance
+            <input name="expectedBalancePaymentDate" type="date" />
+          </label>
+          <label class="checkbox-label">
+            <input name="apprenticeConfirmedAccurate" type="checkbox" required />
+            I confirm that the payment information entered above is accurate.
+          </label>
+          <button type="submit">Submit Payment Information</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>3) Trendswave verification and finalization</h2>
+        <form id="review-form">
+          <label>
+            Verification outcome
+            <select name="status" required>
+              <option value="payment_verified">Payment verified</option>
+              <option value="balance_outstanding">Balance outstanding</option>
+              <option value="fully_paid">Fully paid</option>
+              <option value="payment_disputed">Payment disputed</option>
+            </select>
+          </label>
+          <label>Reviewed by <input name="reviewedBy" required /></label>
+          <label>Review note <textarea name="reviewNote"></textarea></label>
+          <button type="submit">Verify Payment</button>
+        </form>
+        <button id="finalize-button" disabled>Generate + Email Final PDF</button>
+      </section>
+
+      <section>
+        <h2>Workflow Status</h2>
+        <pre id="status-box">Awaiting agreement signature.</pre>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

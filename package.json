@@ -1,0 +1,17 @@
+{
+  "name": "trendswave-apprenticeship-portal",
+  "version": "1.0.0",
+  "description": "Digital apprenticeship agreement, e-signature, document delivery, and progress tracking portal for Trendswave.",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://localhost:26831/trendswave/trendswave-apprenticeship-portal"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
