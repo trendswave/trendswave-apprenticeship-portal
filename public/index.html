@@ -15,8 +15,26 @@
         <form id="agreement-form">
           <label>Apprentice Name <input name="apprenticeName" required /></label>
           <label>Apprentice Email <input name="apprenticeEmail" type="email" required /></label>
+          <label>Apprentice Phone Number <input name="apprenticePhone" required /></label>
+          <label>Apprentice Address <input name="apprenticeAddress" required /></label>
+          <label>Guarantor Full Name <input name="guarantorName" required /></label>
+          <label>Guarantor Location/Address <input name="guarantorLocation" required /></label>
           <label>Signature (typed full name) <input name="apprenticeSignature" required /></label>
-          <label>Agreement Terms <textarea name="termsText" required></textarea></label>
+          <label>
+            Agreement Terms
+            <select name="termsText" required>
+              <option value="">Select terms</option>
+              <option value="3-month apprenticeship term with monthly performance review and active attendance requirement.">
+                3-month term
+              </option>
+              <option value="6-month apprenticeship term with practical assignments, mentor supervision, and monthly review.">
+                6-month term
+              </option>
+              <option value="12-month apprenticeship term with staged evaluation, discipline policy, and completion criteria.">
+                12-month term
+              </option>
+            </select>
+          </label>
           <button type="submit">Sign Agreement</button>
         </form>
       </section>
@@ -32,15 +50,9 @@
             </select>
           </label>
           <label>Amount paid <input name="amountPaid" type="number" min="0" step="0.01" required /></label>
-          <label>Payment date <input name="paymentDate" type="date" required /></label>
-          <label>Payment method/reference <input name="paymentMethodReference" required /></label>
           <label>
             Remaining balance
             <input name="remainingBalance" type="number" min="0" step="0.01" required />
-          </label>
-          <label>
-            Expected payment date for remaining balance
-            <input name="expectedBalancePaymentDate" type="date" />
           </label>
           <label class="checkbox-label">
             <input name="apprenticeConfirmedAccurate" type="checkbox" required />

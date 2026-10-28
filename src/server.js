@@ -68,6 +68,10 @@ const server = http.createServer(async (req, res) => {
       const agreement = workflow.signInitialAgreement({
         apprenticeName: body.apprenticeName,
         apprenticeEmail: body.apprenticeEmail,
+        apprenticePhone: body.apprenticePhone,
+        apprenticeAddress: body.apprenticeAddress,
+        guarantorName: body.guarantorName,
+        guarantorLocation: body.guarantorLocation,
         termsText: body.termsText,
         apprenticeSignature: body.apprenticeSignature
       });
