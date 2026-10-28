@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f6f7fb;
+  color: #1e2230;
+}
+
+main {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 16px 32px;
+}
+
+section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+}
+
+input,
+select,
+textarea,
+button {
+  font-size: 14px;
+  padding: 8px;
+}
+
+.checkbox-label {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  display: grid;
+  gap: 8px;
+}
+
+#status-box {
+  white-space: pre-wrap;
+}
