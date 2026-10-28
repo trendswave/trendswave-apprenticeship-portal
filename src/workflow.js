@@ -19,9 +19,28 @@ class AgreementWorkflowStore {
     this.paymentCounter = 0;
   }
 
-  signInitialAgreement({ apprenticeName, apprenticeEmail, termsText, apprenticeSignature }) {
-    if (!apprenticeName || !apprenticeEmail || !apprenticeSignature) {
-      throw new Error('apprenticeName, apprenticeEmail, and apprenticeSignature are required.');
+  signInitialAgreement({
+    apprenticeName,
+    apprenticeEmail,
+    apprenticePhone,
+    apprenticeAddress,
+    guarantorName,
+    guarantorLocation,
+    termsText,
+    apprenticeSignature
+  }) {
+    if (
+      !apprenticeName ||
+      !apprenticeEmail ||
+      !apprenticePhone ||
+      !apprenticeAddress ||
+      !guarantorName ||
+      !guarantorLocation ||
+      !apprenticeSignature
+    ) {
+      throw new Error(
+        'apprenticeName, apprenticeEmail, apprenticePhone, apprenticeAddress, guarantorName, guarantorLocation, and apprenticeSignature are required.'
+      );
     }
 
     const agreementRootId = `agr-${++this.agreementCounter}`;
@@ -31,6 +50,10 @@ class AgreementWorkflowStore {
       previousVersionId: null,
       apprenticeName,
       apprenticeEmail,
+      apprenticePhone,
+      apprenticeAddress,
+      guarantorName,
+      guarantorLocation,
       termsText: termsText || 'Trendswave apprenticeship terms.',
       apprenticeSignature
     });
@@ -47,6 +70,10 @@ class AgreementWorkflowStore {
       previousVersionId: current.id,
       apprenticeName: current.apprenticeName,
       apprenticeEmail: current.apprenticeEmail,
+      apprenticePhone: current.apprenticePhone,
+      apprenticeAddress: current.apprenticeAddress,
+      guarantorName: current.guarantorName,
+      guarantorLocation: current.guarantorLocation,
       termsText: termsText || current.termsText,
       apprenticeSignature: apprenticeSignature || current.apprenticeSignature
     });
@@ -66,10 +93,7 @@ class AgreementWorkflowStore {
       agreementVersionId: agreement.id,
       paymentMade: normalized.paymentMade,
       amountPaid: normalized.amountPaid,
-      paymentDate: normalized.paymentDate,
-      paymentMethodReference: normalized.paymentMethodReference,
       remainingBalance: normalized.remainingBalance,
-      expectedBalancePaymentDate: normalized.expectedBalancePaymentDate,
       apprenticeConfirmedAccurate: true,
       submittedAt: now,
       reviewedAt: null,
@@ -83,6 +107,13 @@ class AgreementWorkflowStore {
     };
 
     this.paymentRecords.push(record);
+
+    this.mailer.sendAgreementEmail({
+      to: agreement.apprenticeEmail,
+      subject: 'Apprenticeship Application Submission Received',
+      body: 'Your application has been successfully submitted and is pending approval. Check your email for this confirmation of your registration/submission.'
+    });
+
     return { agreement, paymentRecord: record };
   }
 
@@ -199,6 +230,10 @@ class AgreementWorkflowStore {
     previousVersionId,
     apprenticeName,
     apprenticeEmail,
+    apprenticePhone,
+    apprenticeAddress,
+    guarantorName,
+    guarantorLocation,
     termsText,
     apprenticeSignature
   }) {
@@ -210,6 +245,10 @@ class AgreementWorkflowStore {
       previousVersionId,
       apprenticeName,
       apprenticeEmail,
+      apprenticePhone,
+      apprenticeAddress,
+      guarantorName,
+      guarantorLocation,
       termsText,
       apprenticeSignature,
       signedAt,
@@ -222,15 +261,16 @@ class AgreementWorkflowStore {
       'TRENDSWAVE APPRENTICESHIP AGREEMENT (FINALIZED)',
       `Agreement Version: ${agreement.id}`,
       `Apprentice: ${agreement.apprenticeName}`,
+      `Apprentice Phone: ${agreement.apprenticePhone}`,
+      `Apprentice Address: ${agreement.apprenticeAddress}`,
+      `Guarantor Name: ${agreement.guarantorName}`,
+      `Guarantor Location: ${agreement.guarantorLocation}`,
       `Signed At: ${agreement.signedAt}`,
       '',
       'Payment Acknowledgment',
       `Payment Made: ${paymentRecord.paymentMade ? 'Yes' : 'No'}`,
       `Amount Paid: ${paymentRecord.amountPaid}`,
-      `Payment Date: ${paymentRecord.paymentDate}`,
-      `Payment Method/Reference: ${paymentRecord.paymentMethodReference}`,
       `Remaining Balance: ${paymentRecord.remainingBalance}`,
-      `Expected Balance Payment Date: ${paymentRecord.expectedBalancePaymentDate || 'N/A'}`,
       `Trendswave Review Status: ${paymentRecord.status}`,
       `Reviewed By: ${paymentRecord.reviewedBy || 'N/A'}`,
       '',

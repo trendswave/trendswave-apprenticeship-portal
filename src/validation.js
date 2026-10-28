@@ -16,14 +16,6 @@ function toNumber(value, field) {
   return number;
 }
 
-function toDateString(value, field) {
-  const date = new Date(value);
-  if (!value || Number.isNaN(date.getTime())) {
-    throw new Error(`${field} must be a valid date.`);
-  }
-  return date.toISOString().slice(0, 10);
-}
-
 function validatePaymentSubmission(input) {
   if (!input || input.apprenticeConfirmedAccurate !== true) {
     throw new Error('Apprentice must confirm payment information is accurate.');
@@ -37,27 +29,10 @@ function validatePaymentSubmission(input) {
     throw new Error('amountPaid must be zero when paymentMade is false.');
   }
 
-  const paymentDate = toDateString(input.paymentDate, 'paymentDate');
-
-  if (!input.paymentMethodReference || !String(input.paymentMethodReference).trim()) {
-    throw new Error('paymentMethodReference is required.');
-  }
-
-  let expectedBalancePaymentDate = null;
-  if (remainingBalance > 0) {
-    expectedBalancePaymentDate = toDateString(
-      input.expectedBalancePaymentDate,
-      'expectedBalancePaymentDate'
-    );
-  }
-
   return {
     paymentMade,
     amountPaid,
-    paymentDate,
-    paymentMethodReference: String(input.paymentMethodReference).trim(),
     remainingBalance,
-    expectedBalancePaymentDate,
     apprenticeConfirmedAccurate: true
   };
 }

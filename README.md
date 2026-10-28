@@ -4,14 +4,15 @@ Digital apprenticeship agreement, e-signature, payment verification, document de
 
 ## What this version implements
 
-- Apprentice signs the agreement first.
+- Apprentice signs the agreement first with apprentice and guarantor details:
+  - apprentice name, email, phone, and address
+  - guarantor name and location/address
+  - typed signature
+  - selected agreement term duration from a dropdown
 - Apprentice must complete a payment confirmation step before finalization:
   - whether payment was made
   - amount paid
-  - payment date
-  - payment method/reference
   - remaining balance
-  - expected payment date for any balance
   - apprentice accuracy confirmation checkbox
 - Payment status flow with explicit Trendswave review states:
   - `payment_information_submitted`

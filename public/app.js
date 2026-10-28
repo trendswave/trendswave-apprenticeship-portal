@@ -31,6 +31,10 @@ document.getElementById('agreement-form').addEventListener('submit', async (even
     const body = await post('/api/agreement/sign', {
       apprenticeName: form.get('apprenticeName'),
       apprenticeEmail: form.get('apprenticeEmail'),
+      apprenticePhone: form.get('apprenticePhone'),
+      apprenticeAddress: form.get('apprenticeAddress'),
+      guarantorName: form.get('guarantorName'),
+      guarantorLocation: form.get('guarantorLocation'),
       apprenticeSignature: form.get('apprenticeSignature'),
       termsText: form.get('termsText')
     });
@@ -57,17 +61,17 @@ document.getElementById('payment-form').addEventListener('submit', async (event)
       agreementVersionId,
       paymentMade: form.get('paymentMade'),
       amountPaid: form.get('amountPaid'),
-      paymentDate: form.get('paymentDate'),
-      paymentMethodReference: form.get('paymentMethodReference'),
       remainingBalance: form.get('remainingBalance'),
-      expectedBalancePaymentDate: form.get('expectedBalancePaymentDate'),
       apprenticeConfirmedAccurate: form.get('apprenticeConfirmedAccurate') === 'on'
     });
 
     paymentRecordId = body.paymentRecord.id;
     reviewedPaymentRecordId = null;
     finalizeButton.disabled = true;
-    updateStatus('Payment information submitted and awaiting Trendswave verification.', body);
+    updateStatus(
+      'Your application has been successfully submitted and is pending approval. Check your email for confirmation of your registration/submission.',
+      body
+    );
   } catch (error) {
     updateStatus(`Error: ${error.message}`);
   }

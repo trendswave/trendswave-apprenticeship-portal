@@ -14,6 +14,10 @@ test('payment submission starts in awaiting verification with submitted history'
   const agreement = store.signInitialAgreement({
     apprenticeName: 'Jane',
     apprenticeEmail: 'jane@example.com',
+    apprenticePhone: '+2348000000001',
+    apprenticeAddress: '12 Main Street',
+    guarantorName: 'John Guarantor',
+    guarantorLocation: 'Ikeja, Lagos',
     apprenticeSignature: 'Jane Doe'
   });
 
@@ -22,8 +26,6 @@ test('payment submission starts in awaiting verification with submitted history'
     paymentInput: {
       paymentMade: true,
       amountPaid: 200,
-      paymentDate: '2026-04-01',
-      paymentMethodReference: 'bank-ref-1',
       remainingBalance: 0,
       apprenticeConfirmedAccurate: true
     }
@@ -38,6 +40,10 @@ test('finalization is blocked until Trendswave verification status is approved',
   const agreement = store.signInitialAgreement({
     apprenticeName: 'Jane',
     apprenticeEmail: 'jane@example.com',
+    apprenticePhone: '+2348000000001',
+    apprenticeAddress: '12 Main Street',
+    guarantorName: 'John Guarantor',
+    guarantorLocation: 'Ikeja, Lagos',
     apprenticeSignature: 'Jane Doe'
   });
 
@@ -46,8 +52,6 @@ test('finalization is blocked until Trendswave verification status is approved',
     paymentInput: {
       paymentMade: true,
       amountPaid: 200,
-      paymentDate: '2026-04-01',
-      paymentMethodReference: 'bank-ref-1',
       remainingBalance: 0,
       apprenticeConfirmedAccurate: true
     }
@@ -68,6 +72,10 @@ test('review creates a new immutable payment record version', () => {
   const agreement = store.signInitialAgreement({
     apprenticeName: 'Jane',
     apprenticeEmail: 'jane@example.com',
+    apprenticePhone: '+2348000000001',
+    apprenticeAddress: '12 Main Street',
+    guarantorName: 'John Guarantor',
+    guarantorLocation: 'Ikeja, Lagos',
     apprenticeSignature: 'Jane Doe'
   });
 
@@ -76,10 +84,7 @@ test('review creates a new immutable payment record version', () => {
     paymentInput: {
       paymentMade: true,
       amountPaid: 150,
-      paymentDate: '2026-04-01',
-      paymentMethodReference: 'bank-ref-1',
       remainingBalance: 50,
-      expectedBalancePaymentDate: '2026-05-01',
       apprenticeConfirmedAccurate: true
     }
   }).paymentRecord;
@@ -100,6 +105,10 @@ test('finalization after verification emails both apprentice and Trendswave', ()
   const agreement = store.signInitialAgreement({
     apprenticeName: 'Jane',
     apprenticeEmail: 'jane@example.com',
+    apprenticePhone: '+2348000000001',
+    apprenticeAddress: '12 Main Street',
+    guarantorName: 'John Guarantor',
+    guarantorLocation: 'Ikeja, Lagos',
     apprenticeSignature: 'Jane Doe'
   });
 
@@ -108,8 +117,6 @@ test('finalization after verification emails both apprentice and Trendswave', ()
     paymentInput: {
       paymentMade: true,
       amountPaid: 200,
-      paymentDate: '2026-04-01',
-      paymentMethodReference: 'bank-ref-1',
       remainingBalance: 0,
       apprenticeConfirmedAccurate: true
     }
@@ -128,6 +135,7 @@ test('finalization after verification emails both apprentice and Trendswave', ()
 
   assert.equal(finalization.notifications.length, 2);
   assert.equal(finalization.status, 'finalized_and_emailed');
+  assert.equal(store.mailer.sent.length, 3);
 });
 
 test('signed agreements are immutable and updates create new agreement versions', () => {
@@ -135,6 +143,10 @@ test('signed agreements are immutable and updates create new agreement versions'
   const v1 = store.signInitialAgreement({
     apprenticeName: 'Jane',
     apprenticeEmail: 'jane@example.com',
+    apprenticePhone: '+2348000000001',
+    apprenticeAddress: '12 Main Street',
+    guarantorName: 'John Guarantor',
+    guarantorLocation: 'Ikeja, Lagos',
     apprenticeSignature: 'Jane Doe',
     termsText: 'v1 terms'
   });

@@ -12,26 +12,22 @@ test('validatePaymentSubmission requires apprentice confirmation', () => {
         apprenticeConfirmedAccurate: false,
         paymentMade: true,
         amountPaid: 100,
-        paymentDate: '2026-01-01',
-        paymentMethodReference: 'bank transfer',
         remainingBalance: 0
       }),
     /must confirm/
   );
 });
 
-test('validatePaymentSubmission requires balance payment date when balance remains', () => {
+test('validatePaymentSubmission rejects paid amount when paymentMade is false', () => {
   assert.throws(
     () =>
       validatePaymentSubmission({
         apprenticeConfirmedAccurate: true,
-        paymentMade: true,
+        paymentMade: false,
         amountPaid: 100,
-        paymentDate: '2026-01-01',
-        paymentMethodReference: 'bank transfer',
         remainingBalance: 50
       }),
-    /expectedBalancePaymentDate/
+    /amountPaid must be zero/
   );
 });
 
@@ -40,15 +36,12 @@ test('validatePaymentSubmission normalizes valid payload', () => {
     apprenticeConfirmedAccurate: true,
     paymentMade: 'false',
     amountPaid: 0,
-    paymentDate: '2026-01-01',
-    paymentMethodReference: 'none',
-    remainingBalance: 100,
-    expectedBalancePaymentDate: '2026-02-01'
+    remainingBalance: 100
   });
 
   assert.equal(payload.paymentMade, false);
   assert.equal(payload.amountPaid, 0);
-  assert.equal(payload.expectedBalancePaymentDate, '2026-02-01');
+  assert.equal(payload.remainingBalance, 100);
 });
 
 test('validateReviewStatus allows required workflow statuses only', () => {
