@@ -7,85 +7,110 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <main>
-      <h1>Trendswave Apprenticeship Agreement Workflow</h1>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h1>Trendswave Portal</h1>
+        <p class="sidebar-subtitle">Apprenticeship management dashboard</p>
 
-      <section>
-        <h2>1) Apprentice signs agreement</h2>
-        <form id="agreement-form">
-          <label>Apprentice Name <input name="apprenticeName" required /></label>
-          <label>Apprentice Email <input name="apprenticeEmail" type="email" required /></label>
-          <label>Apprentice Phone Number <input name="apprenticePhone" required /></label>
-          <label>Apprentice Address <input name="apprenticeAddress" required /></label>
-          <label>Guarantor Full Name <input name="guarantorName" required /></label>
-          <label>Guarantor Location/Address <input name="guarantorLocation" required /></label>
-          <label>Signature (typed full name) <input name="apprenticeSignature" required /></label>
-          <label>
-            Agreement Terms
-            <select name="termsText" required>
-              <option value="">Select terms</option>
-              <option value="3-month apprenticeship term with monthly performance review and active attendance requirement.">
-                3-month term
-              </option>
-              <option value="6-month apprenticeship term with practical assignments, mentor supervision, and monthly review.">
-                6-month term
-              </option>
-              <option value="12-month apprenticeship term with staged evaluation, discipline policy, and completion criteria.">
-                12-month term
-              </option>
-            </select>
-          </label>
-          <button type="submit">Sign Agreement</button>
-        </form>
-      </section>
+        <nav class="sidebar-nav">
+          <a href="#login-section">Login</a>
+          <a href="#agreement-section">Agreement</a>
+          <a href="#payment-section">Payment</a>
+          <a href="#review-section">Verification</a>
+          <a href="#status-section">Status</a>
+        </nav>
 
-      <section>
-        <h2>2) Apprentice submits payment confirmation</h2>
-        <form id="payment-form">
-          <label>
-            Payment made?
-            <select name="paymentMade" required>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </label>
-          <label>Amount paid <input name="amountPaid" type="number" min="0" step="0.01" required /></label>
-          <label>
-            Remaining balance
-            <input name="remainingBalance" type="number" min="0" step="0.01" required />
-          </label>
-          <label class="checkbox-label">
-            <input name="apprenticeConfirmedAccurate" type="checkbox" required />
-            I confirm that the payment information entered above is accurate.
-          </label>
-          <button type="submit">Submit Payment Information</button>
-        </form>
-      </section>
+        <section class="sidebar-card" id="login-section">
+          <h2>Portal Login</h2>
+          <form id="login-form">
+            <label>Email <input name="loginEmail" type="email" required /></label>
+            <label>Password <input name="loginPassword" type="password" required /></label>
+            <button type="submit">Login</button>
+          </form>
+          <p id="login-message">Please login to continue.</p>
+        </section>
+      </aside>
 
-      <section>
-        <h2>3) Trendswave verification and finalization</h2>
-        <form id="review-form">
-          <label>
-            Verification outcome
-            <select name="status" required>
-              <option value="payment_verified">Payment verified</option>
-              <option value="balance_outstanding">Balance outstanding</option>
-              <option value="fully_paid">Fully paid</option>
-              <option value="payment_disputed">Payment disputed</option>
-            </select>
-          </label>
-          <label>Reviewed by <input name="reviewedBy" required /></label>
-          <label>Review note <textarea name="reviewNote"></textarea></label>
-          <button type="submit">Verify Payment</button>
-        </form>
-        <button id="finalize-button" disabled>Generate + Email Final PDF</button>
-      </section>
+      <main>
+        <h2>Trendswave Apprenticeship Agreement Workflow</h2>
 
-      <section>
-        <h2>Workflow Status</h2>
-        <pre id="status-box">Awaiting agreement signature.</pre>
-      </section>
-    </main>
+        <section id="agreement-section">
+          <h3>1) Apprentice signs agreement</h3>
+          <form id="agreement-form">
+            <label>Apprentice Name <input name="apprenticeName" required /></label>
+            <label>Apprentice Email <input name="apprenticeEmail" type="email" required /></label>
+            <label>Apprentice Phone Number <input name="apprenticePhone" required /></label>
+            <label>Apprentice Address <input name="apprenticeAddress" required /></label>
+            <label>Guarantor Full Name <input name="guarantorName" required /></label>
+            <label>Guarantor Location/Address <input name="guarantorLocation" required /></label>
+            <label>Signature (typed full name) <input name="apprenticeSignature" required /></label>
+            <label>
+              Agreement Terms
+              <select name="termsText" required>
+                <option value="">Select terms</option>
+                <option value="3-month apprenticeship term with monthly performance review and active attendance requirement.">
+                  3-month term
+                </option>
+                <option value="6-month apprenticeship term with practical assignments, mentor supervision, and monthly review.">
+                  6-month term
+                </option>
+                <option value="12-month apprenticeship term with staged evaluation, discipline policy, and completion criteria.">
+                  12-month term
+                </option>
+              </select>
+            </label>
+            <button type="submit">Sign Agreement</button>
+          </form>
+        </section>
+
+        <section id="payment-section">
+          <h3>2) Apprentice submits payment confirmation</h3>
+          <form id="payment-form">
+            <label>
+              Payment made?
+              <select name="paymentMade" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </label>
+            <label>Amount paid <input name="amountPaid" type="number" min="0" step="0.01" required /></label>
+            <label>
+              Remaining balance
+              <input name="remainingBalance" type="number" min="0" step="0.01" required />
+            </label>
+            <label class="checkbox-label">
+              <input name="apprenticeConfirmedAccurate" type="checkbox" required />
+              I confirm that the payment information entered above is accurate.
+            </label>
+            <button type="submit">Submit Payment Information</button>
+          </form>
+        </section>
+
+        <section id="review-section">
+          <h3>3) Trendswave verification and finalization</h3>
+          <form id="review-form">
+            <label>
+              Verification outcome
+              <select name="status" required>
+                <option value="payment_verified">Payment verified</option>
+                <option value="balance_outstanding">Balance outstanding</option>
+                <option value="fully_paid">Fully paid</option>
+                <option value="payment_disputed">Payment disputed</option>
+              </select>
+            </label>
+            <label>Reviewed by <input name="reviewedBy" required /></label>
+            <label>Review note <textarea name="reviewNote"></textarea></label>
+            <button type="submit">Verify Payment</button>
+          </form>
+          <button id="finalize-button" disabled>Generate + Email Final PDF</button>
+        </section>
+
+        <section id="status-section">
+          <h3>Workflow Status</h3>
+          <pre id="status-box">Awaiting agreement signature.</pre>
+        </section>
+      </main>
+    </div>
 
     <script src="/app.js"></script>
   </body>

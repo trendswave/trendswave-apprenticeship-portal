@@ -4,10 +4,18 @@ let reviewedPaymentRecordId = null;
 
 const statusBox = document.getElementById('status-box');
 const finalizeButton = document.getElementById('finalize-button');
+const loginMessage = document.getElementById('login-message');
 
 function updateStatus(message, data) {
   statusBox.textContent = `${message}\n\n${data ? JSON.stringify(data, null, 2) : ''}`;
 }
+
+document.getElementById('login-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  const email = String(form.get('loginEmail') || '').trim();
+  loginMessage.textContent = `Welcome, ${email}. You are logged in to the portal interface.`;
+});
 
 async function post(url, payload) {
   const response = await fetch(url, {

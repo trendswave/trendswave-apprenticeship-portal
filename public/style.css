@@ -1,26 +1,85 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background: #f6f7fb;
-  color: #1e2230;
+  background: #061633;
+  color: #e8eefc;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+.sidebar {
+  background: #091f46;
+  padding: 24px 18px;
+  border-right: 1px solid #274576;
+}
+
+.sidebar h1 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.sidebar-subtitle {
+  color: #b8c8ea;
+  margin-bottom: 16px;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sidebar-nav a {
+  color: #d9e6ff;
+  text-decoration: none;
+  background: #153569;
+  border: 1px solid #2c4d85;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.sidebar-nav a:hover {
+  background: #20457f;
+}
+
+.sidebar-card {
+  background: #102d5e;
+  border: 1px solid #30548f;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.sidebar-card h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+#login-message {
+  margin-bottom: 0;
+  color: #b8c8ea;
 }
 
 main {
-  max-width: 900px;
-  margin: 24px auto;
-  padding: 0 16px 32px;
+  padding: 24px;
+  max-width: 980px;
 }
 
 section {
-  background: #fff;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
+  background: #0c2550;
+  border: 1px solid #28477f;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
 }
 
 form {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 label {
@@ -33,7 +92,9 @@ select,
 textarea,
 button {
   font-size: 14px;
-  padding: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #3a5d94;
 }
 
 .checkbox-label {
@@ -43,6 +104,46 @@ button {
   gap: 8px;
 }
 
+input,
+select,
+textarea {
+  background: #082041;
+  color: #eaf0ff;
+}
+
+button {
+  background: linear-gradient(180deg, #2f62b0, #214a8d);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 #status-box {
   white-space: pre-wrap;
+  background: #051629;
+  border: 1px solid #2f4d7f;
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 100px;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid #274576;
+  }
 }

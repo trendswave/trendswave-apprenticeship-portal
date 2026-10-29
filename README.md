@@ -25,6 +25,7 @@ Digital apprenticeship agreement, e-signature, payment verification, document de
 - Finalized PDF notification is sent to both apprentice and Trendswave.
 - Signed agreement versions are immutable; updates must create a new agreement version.
 - Payment records are immutable; review/changes create a new payment record version linked to the prior record.
+- Frontend uses a dark navy dashboard layout with sidebar navigation and a portal login interface section.
 
 ## Quick start
 
